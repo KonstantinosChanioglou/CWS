@@ -16,3 +16,6 @@ So far what I have:
    3) So this will be the precompiles functionality in the design BPMN time to publish topics
 3) Then Message broker publish topics
 4) Adaptors implement HL7 and trigger with the appropriate system to execute the UF
+
+Next Steps:
+1) Assign variable from the class and utilize it in the BPMN!!!
