@@ -36,7 +36,14 @@ So far what I have:
 4) Adaptors implement HL7 and trigger with the appropriate system to execute the UF
 
 Next Steps:
-1) Create Broker
-2) Add functionality to the TemperatureTaking to publish topics
-3) Implement Adaptor to sub/pub
-4) Implement example External system to respond to the request.
+1) Validate Functionality of the implemented components
+   1) Precompiled Functionality
+   2) Adaptor
+   3) External System
+2) Validate Broker Facrionality
+   1) What if there are two consumers or 2 external systems publish the smae information?
+
+Question to Aly:
+1) Is what I am doing the wanted?
+2) Map the current architecture with mine
+3) Evaluate the 3 scenarios for deployment scenarios
