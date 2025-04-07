@@ -42,6 +42,12 @@ Next Steps:
    3) External System
 2) Validate Broker Facrionality
    1) What if there are two consumers or 2 external systems publish the smae information?
+      2) How the broker works. I  assume that it works like the topics. Make it work like that
+   2) Implement two different adaptors 
+   3) Two external systems 
+   4) Evaluate how the tasks in the pbmn can use the precompiled functionality to build the logic
+   5) What pre-post conditions can be implemented in the UF and how can be implemented?
+   6) See the definition for the Unit duntion that I gave and see how it can be implemented
 
 Question to Aly:
 1) Is what I am doing the wanted?
