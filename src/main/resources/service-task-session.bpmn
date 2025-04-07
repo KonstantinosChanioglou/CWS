@@ -5,10 +5,23 @@
       <bpmn:incoming>Flow_0ouw2o0</bpmn:incoming>
       <bpmn:incoming>Flow_0hbp239</bpmn:incoming>
     </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0fvh6m6" sourceRef="Activity_14m7l8v" targetRef="Gateway_0ctpk5v" />
+    <bpmn:sequenceFlow id="Flow_0gvmpa5" sourceRef="Gateway_0ctpk5v" targetRef="Activity_1lujhl8">
+      <bpmn:extensionElements />
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=temperature &gt;= 38</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_0hbp239" sourceRef="Activity_1lujhl8" targetRef="Event_18nx2hj" />
+    <bpmn:sequenceFlow id="Flow_0ouw2o0" sourceRef="Activity_0si1ix0" targetRef="Event_18nx2hj" />
+    <bpmn:sequenceFlow id="Flow_0pxjoh8" sourceRef="Gateway_0ctpk5v" targetRef="Activity_0si1ix0">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=temperature &lt; 38</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_0x5ky8h" sourceRef="StartEvent_1" targetRef="Activity_14m7l8v" />
-    <bpmn:startEvent id="StartEvent_1">
-      <bpmn:outgoing>Flow_0x5ky8h</bpmn:outgoing>
-    </bpmn:startEvent>
+    <bpmn:exclusiveGateway id="Gateway_0ctpk5v">
+      <bpmn:extensionElements />
+      <bpmn:incoming>Flow_0fvh6m6</bpmn:incoming>
+      <bpmn:outgoing>Flow_0gvmpa5</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0pxjoh8</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
     <bpmn:serviceTask id="Activity_14m7l8v" name="service-task">
       <bpmn:extensionElements>
         <zeebe:taskDefinition type="temperaturetaking" />
@@ -16,27 +29,9 @@
       <bpmn:incoming>Flow_0x5ky8h</bpmn:incoming>
       <bpmn:outgoing>Flow_0fvh6m6</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:sequenceFlow id="Flow_0fvh6m6" sourceRef="Activity_14m7l8v" targetRef="Gateway_0ctpk5v" />
-    <bpmn:exclusiveGateway id="Gateway_0ctpk5v">
-      <bpmn:incoming>Flow_0fvh6m6</bpmn:incoming>
-      <bpmn:outgoing>Flow_0gvmpa5</bpmn:outgoing>
-      <bpmn:outgoing>Flow_0pxjoh8</bpmn:outgoing>
-    </bpmn:exclusiveGateway>
-    <bpmn:sequenceFlow id="Flow_0gvmpa5" sourceRef="Gateway_0ctpk5v" targetRef="Activity_1lujhl8">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=temperature &gt;= 38</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_0pxjoh8" sourceRef="Gateway_0ctpk5v" targetRef="Activity_0si1ix0">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=temperature &lt; 38</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_0ouw2o0" sourceRef="Activity_0si1ix0" targetRef="Event_18nx2hj" />
-    <bpmn:sequenceFlow id="Flow_0hbp239" sourceRef="Activity_1lujhl8" targetRef="Event_18nx2hj" />
-    <bpmn:serviceTask id="Activity_1lujhl8" name="Temperature Normal">
-      <bpmn:extensionElements>
-        <zeebe:taskDefinition type="dummyaction" />
-      </bpmn:extensionElements>
-      <bpmn:incoming>Flow_0gvmpa5</bpmn:incoming>
-      <bpmn:outgoing>Flow_0hbp239</bpmn:outgoing>
-    </bpmn:serviceTask>
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_0x5ky8h</bpmn:outgoing>
+    </bpmn:startEvent>
     <bpmn:serviceTask id="Activity_0si1ix0" name="Temperature Abnormal">
       <bpmn:extensionElements>
         <zeebe:taskDefinition type="dummyaction" />
@@ -44,44 +39,35 @@
       <bpmn:incoming>Flow_0pxjoh8</bpmn:incoming>
       <bpmn:outgoing>Flow_0ouw2o0</bpmn:outgoing>
     </bpmn:serviceTask>
+    <bpmn:serviceTask id="Activity_1lujhl8" name="Temperature Normal">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="dummyaction" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0gvmpa5</bpmn:incoming>
+      <bpmn:outgoing>Flow_0hbp239</bpmn:outgoing>
+    </bpmn:serviceTask>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="service-task-session">
       <bpmndi:BPMNShape id="Event_18nx2hj_di" bpmnElement="Event_18nx2hj">
         <dc:Bounds x="732" y="202" width="36" height="36" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="StartEvent_1_di" bpmnElement="StartEvent_1">
-        <dc:Bounds x="152" y="202" width="36" height="36" />
+      <bpmndi:BPMNShape id="Gateway_0ctpk5v_di" bpmnElement="Gateway_0ctpk5v" isMarkerVisible="true">
+        <dc:Bounds x="445" y="195" width="50" height="50" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_14m7l8v_di" bpmnElement="Activity_14m7l8v">
         <dc:Bounds x="290" y="180" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Gateway_0ctpk5v_di" bpmnElement="Gateway_0ctpk5v" isMarkerVisible="true">
-        <dc:Bounds x="445" y="195" width="50" height="50" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1355sc0_di" bpmnElement="Activity_1lujhl8">
-        <dc:Bounds x="530" y="80" width="100" height="80" />
+      <bpmndi:BPMNShape id="StartEvent_1_di" bpmnElement="StartEvent_1">
+        <dc:Bounds x="152" y="202" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0jlxazc_di" bpmnElement="Activity_0si1ix0">
         <dc:Bounds x="530" y="250" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="Flow_0ouw2o0_di" bpmnElement="Flow_0ouw2o0">
-        <di:waypoint x="630" y="290" />
-        <di:waypoint x="696" y="290" />
-        <di:waypoint x="696" y="220" />
-        <di:waypoint x="732" y="220" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0hbp239_di" bpmnElement="Flow_0hbp239">
-        <di:waypoint x="630" y="120" />
-        <di:waypoint x="696" y="120" />
-        <di:waypoint x="696" y="220" />
-        <di:waypoint x="732" y="220" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0x5ky8h_di" bpmnElement="Flow_0x5ky8h">
-        <di:waypoint x="188" y="220" />
-        <di:waypoint x="290" y="220" />
-      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Activity_1355sc0_di" bpmnElement="Activity_1lujhl8">
+        <dc:Bounds x="530" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_0fvh6m6_di" bpmnElement="Flow_0fvh6m6">
         <di:waypoint x="390" y="220" />
         <di:waypoint x="445" y="220" />
@@ -91,10 +77,26 @@
         <di:waypoint x="470" y="120" />
         <di:waypoint x="530" y="120" />
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0hbp239_di" bpmnElement="Flow_0hbp239">
+        <di:waypoint x="630" y="120" />
+        <di:waypoint x="696" y="120" />
+        <di:waypoint x="696" y="220" />
+        <di:waypoint x="732" y="220" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0ouw2o0_di" bpmnElement="Flow_0ouw2o0">
+        <di:waypoint x="630" y="290" />
+        <di:waypoint x="696" y="290" />
+        <di:waypoint x="696" y="220" />
+        <di:waypoint x="732" y="220" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0pxjoh8_di" bpmnElement="Flow_0pxjoh8">
         <di:waypoint x="470" y="245" />
         <di:waypoint x="470" y="290" />
         <di:waypoint x="530" y="290" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0x5ky8h_di" bpmnElement="Flow_0x5ky8h">
+        <di:waypoint x="188" y="220" />
+        <di:waypoint x="290" y="220" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

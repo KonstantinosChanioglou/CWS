@@ -6,8 +6,26 @@
 
 Infastructure
 1) Run CWS docker image
+2) run Rabitmq
+   3) docker run -d --hostname rabbitmq --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3-management
+   4) # Connect to RabbitMQ Docker container
+   docker exec -it rabbitmq rabbitmqctl list_exchanges
+   
+   # Create an exchange
+   docker exec -it rabbitmq rabbitmqadmin declare exchange name=temperature.exchange type=direct
+   
+   # Create queues
+   docker exec -it rabbitmq rabbitmqadmin declare queue name=temperature.request.queue durable=true
+   docker exec -it rabbitmq rabbitmqadmin declare queue name=temperature.response.queue durable=true
+   
+   # Bind queues to exchange
+   docker exec -it rabbitmq rabbitmqadmin declare binding source=temperature.exchange destination=temperature.request.queue routing_key=temperature.request
+   docker exec -it rabbitmq rabbitmqadmin declare binding source=temperature.exchange destination=temperature.response.queue routing_key=temperature.response
+
 2) Run CWS Intelij main class
 3) Design and deploy BPMN
+4) Execute the BPMN
+5) Open Camunda processes and tasklist from docker to see the execution
 
 
 So far what I have:
@@ -18,4 +36,7 @@ So far what I have:
 4) Adaptors implement HL7 and trigger with the appropriate system to execute the UF
 
 Next Steps:
-1) Assign variable from the class and utilize it in the BPMN!!!
+1) Create Broker
+2) Add functionality to the TemperatureTaking to publish topics
+3) Implement Adaptor to sub/pub
+4) Implement example External system to respond to the request.
