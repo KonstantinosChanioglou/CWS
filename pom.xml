@@ -55,7 +55,26 @@
 			<version>2.7.5</version>  <!-- Version matching your Spring Boot version -->
 		</dependency>
 
+		<dependency>
+			<groupId>io.camunda</groupId>
+			<artifactId>zeebe-client-java</artifactId>  <!-- This is the correct artifactId -->
+			<version>8.6.12</version>
+		</dependency>
+
+
 	</dependencies>
+
+	<repositories>
+		<repository>
+			<id>camunda</id>
+			<url>https://repository.camunda.com/artifactory/public/</url>
+		</repository>
+		<repository>
+			<id>maven-central</id>
+			<url>https://repo1.maven.org/maven2/</url>
+		</repository>
+	</repositories>
+
 
 	<build>
 		<plugins>

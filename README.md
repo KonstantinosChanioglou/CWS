@@ -6,25 +6,12 @@
 
 Infastructure
 1) Run CWS docker image
-2) run Rabitmq
-   3) docker run -d --hostname rabbitmq --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3-management
-   4) # Connect to RabbitMQ Docker container
-   docker exec -it rabbitmq rabbitmqctl list_exchanges
-   
-   # Create an exchange
-   docker exec -it rabbitmq rabbitmqadmin declare exchange name=temperature.exchange type=direct
-   
-   # Create queues
-   docker exec -it rabbitmq rabbitmqadmin declare queue name=temperature.request.queue durable=true
-   docker exec -it rabbitmq rabbitmqadmin declare queue name=temperature.response.queue durable=true
-   
-   # Bind queues to exchange
-   docker exec -it rabbitmq rabbitmqadmin declare binding source=temperature.exchange destination=temperature.request.queue routing_key=temperature.request
-   docker exec -it rabbitmq rabbitmqadmin declare binding source=temperature.exchange destination=temperature.response.queue routing_key=temperature.response
-
 2) Run CWS Intelij main class
 3) Design and deploy BPMN
 4) Execute the BPMN
+   5) Invoke-WebRequest -Uri "http://localhost:8080/process/deploy?filePath=src/main/resources/service-task-session.bpmn" -Method POST
+   6) Invoke-WebRequest -Uri "http://localhost:8080/process/execute?processId=service-task-session" -Method POST
+
 5) Open Camunda processes and tasklist from docker to see the execution
 
 
@@ -53,3 +40,58 @@ Question to Aly:
 1) Is what I am doing the wanted?
 2) Map the current architecture with mine
 3) Evaluate the 3 scenarios for deployment scenarios
+
+Problems:
+1) ![img.png](img.png) OR the form does not appear?
+   2) Just embed the JSON of the form inside the BPMN
+      3) ![img_1.png](img_1.png)
+
+
+Documentation:
+
+1) Camunda8Application.java: The main Spring Boot application class responsible for bootstrapping the application and initializing all configured components and services. It includes the @EnableZeebeClient annotation to connect the application to the Zeebe broker.
+
+2) TemperatureTake.java: Defines the logic for handling specific process tasks related to temperature monitoring. Interacts with RabbitMQ to publish messages to adaptors for requesting temperature from external systems
+
+3) PMAdaptor.java (Formerly TemperatureAdaptor.java): Acts as adaptow that listens to interested topics and sends Requests to PM. Same way once it has a response publish to specific topics the response data
+
+Dynamic BPMN Reconfiguration, Deployment and Execution
+
+1) DynamicQueueManager.java: 
+   1) Provides functionlity for dynamic creation and deletion of message queues within RabbitMQ.
+   2) Then the consumers producers use it to decrate the routing keys and queues.
+   3) It also creates the exchange 
+
+2) ProcessController.java: Exposes REST endpoints to deploy BPMN files and start process instances, providing an interface for internal system to deploy new BPMNs and for external systems or users to trigger workflows within the application. 
+   3) ProcessDeployer.java: Handles the deployment of BPMN files to the Zeebe broker by reading files from disk and sending them via the Zeebe client, logging the deployment results. 
+   4) ProcessExecutor.java: Responsible for starting process instances on the Zeebe broker based on the deployed process IDs. It accepts variables as input and triggers the appropriate process execution.
+
+
+application.properties: Configuration file containing settings related to the Spring Boot application, including Zeebe broker connection details, RabbitMQ settings, and other application-specific properties.
+
+
+service-task-session.bpmn: BPMN file defining a different workflow, potentially with service tasks requiring integration with external systems or automated processing.
+
+docker-compose.yaml: Configuration file defining services, networks, and dependencies for running the application with Docker, including Zeebe broker, RabbitMQ, and other components as containers.
+
+
+Current Idea:
+
+1) Edit
+2) Deploy
+   3) Invoke-WebRequest -Uri "http://localhost:8080/process/deploy?filePath=src/main/resources/service-task-session.bpmn" -Method POST
+4) Execute 
+   5) Manualy 
+   6) Automatically from PM (not yet) but simple executing: Invoke-WebRequest -Uri "http://localhost:8080/trigger-sepsis" -Method POST
+      7) Now the PM adaptor received request 
+      8) Publish sepsis.execution
+      9) ProcessExecutor Listens and executes the process with the correc ID
+      10) Service task is executed and calls TemperatureTaking
+      11) Publish topic to the adaptor and recieving the temperature from a server like being the PM.
+      12) Value is published to temperature.response to the TemperatureTakings
+      13) Value goas back to the BPMN
+
+ToDo
+1) Chagnge scherarios and run without recompilation
+2) Presentation
+3) Clean Code and create scenarios that must be handled by the system

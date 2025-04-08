@@ -1,27 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1vrxkzp" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.33.1" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.5.0">
-  <bpmn:process id="service-task-session" isExecutable="true">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1vrxkzp" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.33.1" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.4.0">
+  <bpmn:process id="service-task-session" name="Manual User Task" isExecutable="true">
+    <bpmn:extensionElements>
+      <zeebe:userTaskForm id="UserTaskForm_1u1lhga">{
+  "components": [
+    {
+      "label": "Text field",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1t65wd1",
+        "columns": null
+      },
+      "id": "Field_0lg5fcr",
+      "key": "textfield_yhpt9o"
+    }
+  ],
+  "type": "default",
+  "id": "Form_1xtwg1i",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.4.0",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.33.1"
+  },
+  "schemaVersion": 18,
+  "formKey": "camunda-forms:Form_1xtwg1i"
+}
+</zeebe:userTaskForm>
+    </bpmn:extensionElements>
     <bpmn:endEvent id="Event_18nx2hj">
       <bpmn:incoming>Flow_0ouw2o0</bpmn:incoming>
-      <bpmn:incoming>Flow_0hbp239</bpmn:incoming>
+      <bpmn:incoming>Flow_1k4605i</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="Flow_0fvh6m6" sourceRef="Activity_14m7l8v" targetRef="Gateway_0ctpk5v" />
-    <bpmn:sequenceFlow id="Flow_0gvmpa5" sourceRef="Gateway_0ctpk5v" targetRef="Activity_1lujhl8">
-      <bpmn:extensionElements />
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=temperature &gt;= 38</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_0hbp239" sourceRef="Activity_1lujhl8" targetRef="Event_18nx2hj" />
     <bpmn:sequenceFlow id="Flow_0ouw2o0" sourceRef="Activity_0si1ix0" targetRef="Event_18nx2hj" />
     <bpmn:sequenceFlow id="Flow_0pxjoh8" sourceRef="Gateway_0ctpk5v" targetRef="Activity_0si1ix0">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=temperature &lt; 38</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_0x5ky8h" sourceRef="StartEvent_1" targetRef="Activity_14m7l8v" />
+    <bpmn:sequenceFlow id="Flow_1k4605i" sourceRef="Activity_0b0t4gf" targetRef="Event_18nx2hj" />
+    <bpmn:sequenceFlow id="Flow_1xhuka5" sourceRef="Gateway_0ctpk5v" targetRef="Activity_0b0t4gf">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=temperature &gt;= 38</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
     <bpmn:exclusiveGateway id="Gateway_0ctpk5v">
       <bpmn:extensionElements />
       <bpmn:incoming>Flow_0fvh6m6</bpmn:incoming>
-      <bpmn:outgoing>Flow_0gvmpa5</bpmn:outgoing>
       <bpmn:outgoing>Flow_0pxjoh8</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1xhuka5</bpmn:outgoing>
     </bpmn:exclusiveGateway>
+    <bpmn:userTask id="Activity_0b0t4gf" name="Manual User Task">
+      <bpmn:extensionElements>
+        <zeebe:formDefinition formKey="camunda-forms:bpmn:UserTaskForm_1u1lhga" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1xhuka5</bpmn:incoming>
+      <bpmn:outgoing>Flow_1k4605i</bpmn:outgoing>
+    </bpmn:userTask>
     <bpmn:serviceTask id="Activity_14m7l8v" name="service-task">
       <bpmn:extensionElements>
         <zeebe:taskDefinition type="temperaturetaking" />
@@ -39,13 +72,6 @@
       <bpmn:incoming>Flow_0pxjoh8</bpmn:incoming>
       <bpmn:outgoing>Flow_0ouw2o0</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:serviceTask id="Activity_1lujhl8" name="Temperature Normal">
-      <bpmn:extensionElements>
-        <zeebe:taskDefinition type="dummyaction" />
-      </bpmn:extensionElements>
-      <bpmn:incoming>Flow_0gvmpa5</bpmn:incoming>
-      <bpmn:outgoing>Flow_0hbp239</bpmn:outgoing>
-    </bpmn:serviceTask>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="service-task-session">
@@ -55,6 +81,10 @@
       <bpmndi:BPMNShape id="Gateway_0ctpk5v_di" bpmnElement="Gateway_0ctpk5v" isMarkerVisible="true">
         <dc:Bounds x="445" y="195" width="50" height="50" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0b0t4gf_di" bpmnElement="Activity_0b0t4gf">
+        <dc:Bounds x="530" y="100" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_14m7l8v_di" bpmnElement="Activity_14m7l8v">
         <dc:Bounds x="290" y="180" width="100" height="80" />
         <bpmndi:BPMNLabel />
@@ -63,40 +93,37 @@
         <dc:Bounds x="152" y="202" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0jlxazc_di" bpmnElement="Activity_0si1ix0">
-        <dc:Bounds x="530" y="250" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1355sc0_di" bpmnElement="Activity_1lujhl8">
-        <dc:Bounds x="530" y="80" width="100" height="80" />
+        <dc:Bounds x="530" y="350" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_0fvh6m6_di" bpmnElement="Flow_0fvh6m6">
         <di:waypoint x="390" y="220" />
         <di:waypoint x="445" y="220" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0gvmpa5_di" bpmnElement="Flow_0gvmpa5">
-        <di:waypoint x="470" y="195" />
-        <di:waypoint x="470" y="120" />
-        <di:waypoint x="530" y="120" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0hbp239_di" bpmnElement="Flow_0hbp239">
-        <di:waypoint x="630" y="120" />
-        <di:waypoint x="696" y="120" />
-        <di:waypoint x="696" y="220" />
-        <di:waypoint x="732" y="220" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0ouw2o0_di" bpmnElement="Flow_0ouw2o0">
-        <di:waypoint x="630" y="290" />
-        <di:waypoint x="696" y="290" />
+        <di:waypoint x="630" y="390" />
+        <di:waypoint x="696" y="390" />
         <di:waypoint x="696" y="220" />
         <di:waypoint x="732" y="220" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0pxjoh8_di" bpmnElement="Flow_0pxjoh8">
         <di:waypoint x="470" y="245" />
-        <di:waypoint x="470" y="290" />
-        <di:waypoint x="530" y="290" />
+        <di:waypoint x="470" y="390" />
+        <di:waypoint x="530" y="390" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0x5ky8h_di" bpmnElement="Flow_0x5ky8h">
         <di:waypoint x="188" y="220" />
         <di:waypoint x="290" y="220" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1k4605i_di" bpmnElement="Flow_1k4605i">
+        <di:waypoint x="630" y="140" />
+        <di:waypoint x="700" y="140" />
+        <di:waypoint x="700" y="220" />
+        <di:waypoint x="732" y="220" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1xhuka5_di" bpmnElement="Flow_1xhuka5">
+        <di:waypoint x="470" y="195" />
+        <di:waypoint x="470" y="140" />
+        <di:waypoint x="530" y="140" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
