@@ -1,4 +1,4 @@
-package com.poc.camunda8;
+package com.poc.camunda8.ExecutionEngine;
 
 import org.springframework.amqp.core.*;
 import org.springframework.context.annotation.Bean;

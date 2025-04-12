@@ -1,4 +1,4 @@
-package com.poc.camunda8;
+package com.poc.camunda8.ExecutionEngine;
 
 import io.camunda.zeebe.client.ZeebeClient;
 import io.camunda.zeebe.client.api.response.DeploymentEvent;
@@ -32,7 +32,7 @@ public class ProcessDeployer {
             List<Process> deployedProcesses = response.getProcesses();
 
             for (Process process : deployedProcesses) {
-                System.out.println("✅ Deployed process: " + process.getBpmnProcessId()
+                System.out.println("✅ Ex. Enigne: Deployed process: " + process.getBpmnProcessId()
                         + " | Version: " + process.getVersion()
                         + " | Process Definition Key: " + process.getProcessDefinitionKey());
             }

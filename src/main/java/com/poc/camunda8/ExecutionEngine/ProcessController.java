@@ -1,4 +1,4 @@
-package com.poc.camunda8;
+package com.poc.camunda8.ExecutionEngine;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +22,7 @@ public class ProcessController {
         return "Deployment triggered for file: " + filePath;
     }
 
+    //This is triggering for manual trigger with HTTP
     @PostMapping("/execute")
     public String execute(@RequestParam String processId) {
         Map<String, Object> variables = new HashMap<>();

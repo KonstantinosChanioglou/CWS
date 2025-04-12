@@ -13,7 +13,10 @@ Infastructure
    6) Invoke-WebRequest -Uri "http://localhost:8080/process/execute?processId=service-task-session" -Method POST
 
 5) Open Camunda processes and tasklist from docker to see the execution
-
+6) For the database
+   1) Go to the External systems folder inside the PatientMedicalRecordsDb
+   2) docker-compose up --build 
+      3) to build the container containing the database pretending the external system
 
 So far what I have:
 1) Service task can execute precompiles classes in the project in order to publish specific topics to the message broker
@@ -82,7 +85,7 @@ Current Idea:
    3) Invoke-WebRequest -Uri "http://localhost:8080/process/deploy?filePath=src/main/resources/service-task-session.bpmn" -Method POST
 4) Execute 
    5) Manualy 
-   6) Automatically from PM (not yet) but simple executing: Invoke-WebRequest -Uri "http://localhost:8080/trigger-sepsis" -Method POST
+   6) Automatically from PM (not yet) but simple executing: Invoke-WebRequest -Uri "http://localhost:8181/trigger-sepsis" -Method POST -Body (@{ patientId = 1 } | ConvertTo-Json) -ContentType "application/json"
       7) Now the PM adaptor received request 
       8) Publish sepsis.execution
       9) ProcessExecutor Listens and executes the process with the correc ID
