@@ -1,4 +1,4 @@
-1) from https://github.com/techbuzzblogs/camunda/tree/main/camunda-platform-8.0.0
+1)Execution Enginecontainers: from https://github.com/techbuzzblogs/camunda/tree/main/camunda-platform-8.0.0
    2) dowload the YAML file
    3) RUN docker-compose -f docker-compose-core.yaml up -d
    4) Download connectors https://hub.docker.com/r/camunda/connectors
@@ -85,7 +85,8 @@ Current Idea:
    3) Invoke-WebRequest -Uri "http://localhost:8080/process/deploy?filePath=src/main/resources/service-task-session.bpmn" -Method POST
 4) Execute 
    5) Manualy 
-   6) Automatically from PM (not yet) but simple executing: Invoke-WebRequest -Uri "http://localhost:8181/trigger-sepsis" -Method POST -Body (@{ patientId = 1 } | ConvertTo-Json) -ContentType "application/json"
+   6) Automatically from PM (not yet) but simple executing: Invoke-WebRequest -Uri "http://localhost:8181/trigger-sepsis" -Method POST -Body (@{ patientId = 1 } | ConvertTo-Json) -ContentType "application/json" or from inside the PM adaptor container    curl -X POST http://localhost:8181/trigger-sepsis -H "Content-Type: application/json" -d '{"patientId": 1}'
+
       7) Now the PM adaptor received request 
       8) Publish sepsis.execution
       9) ProcessExecutor Listens and executes the process with the correc ID
@@ -98,3 +99,23 @@ ToDo
 1) Chagnge scherarios and run without recompilation
 2) Presentation
 3) Clean Code and create scenarios that must be handled by the system
+
+Docker)
+Create the jar from the maven (View->Tools Window->Maven->Lifecycle->package or install) and then create the docker container and run it
+
+docker build -t uf-temperature .
+docker run --name temperature-uf -e SPRING_PROFILES_ACTIVE=dev -e SPRING_RABBITMQ_HOST=host.docker.internal -e ZEEBE_CLIENT_BROKER_GATEWAY-ADDRESS=host.docker.internal:26500 uf-temperature
+
+
+docker build -t pm-adaptor .
+docker run -d --name pm-adaptor -e SPRING_RABBITMQ_HOST=host.docker.internal -p 8083:8080  pm-adaptor
+
+
+
+For building all the contaies(UFs and Adaptors):
+go to CWS folder and do:
+Create once again the jars
+docker compose build
+docker compose up (or docker compose up heart-rate temperature) for runing specific UFs
+)
+For the external systems (db & patient monitor build/run them indipendently)

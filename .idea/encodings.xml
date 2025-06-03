@@ -1,6 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/Adaptors/PatientMedicalRecordAdaptor/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Adaptors/PatientMedicalRecordAdaptor/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Adaptors/PatientMonitor/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Adaptors/PatientMonitorAdaptor/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Adaptors/PatientMonitorAdaptor/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Adaptors/PatientMonitorAdaptorExtVendor/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Adaptors/PatientMonitorAdaptorExtVendor/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/CWS-parent/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/SurgeryHistory/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/SurgeryHistory/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/UFs/Age/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/UFs/Age/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/UFs/BloodPressure/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/UFs/BloodPressure/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/UFs/ChronicIlliness/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/UFs/ChronicIlliness/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/UFs/DummyAction/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/UFs/DummyAction/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/UFs/HeartRate/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/UFs/HeartRate/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/UFs/ImmuneCompromisation/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/UFs/ImmuneCompromisation/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/UFs/MeanArterialPressure/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/UFs/MeanArterialPressure/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/UFs/RespirationRate/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/UFs/RespirationRate/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/UFs/SystolicBloodPressure/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/UFs/SystolicBloodPressure/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/UFs/Temperature/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/UFs/Temperature/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/UFs/WorkflowRequestController/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/UFs/WorkflowRequestController/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common-utils/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common-utils/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
   </component>
 </project>

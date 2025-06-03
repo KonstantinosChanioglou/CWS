@@ -1,0 +1,92 @@
+version: '3.9'
+services:
+  age:
+    build: ./UFs/Age
+    image: uf-age
+    ports:
+      - "8001:8080"
+
+  blood-pressure:
+    build: ./UFs/BloodPressure
+    image: uf-bloodpressure
+    ports:
+      - "8002:8080"
+
+  chronic-illness:
+    build: ./UFs/ChronicIlliness
+    image: uf-chronicillness
+    ports:
+      - "8003:8080"
+
+  dummy-action:
+    build: ./UFs/DummyAction
+    image: uf-dummyaction
+    ports:
+      - "8004:8080"
+
+  heart-rate:
+    build: ./UFs/HeartRate
+    image: uf-heartrate
+    ports:
+      - "8005:8080"
+
+  immune-compromisation:
+    build: ./UFs/ImmuneCompromisation
+    image: uf-immunecompromisation
+    ports:
+      - "8006:8080"
+
+  mean-arterial-pressure:
+    build: ./UFs/MeanArterialPressure
+    image: uf-map
+    ports:
+      - "8007:8080"
+
+  respiration-rate:
+    build: ./UFs/RespirationRate
+    image: uf-respirationrate
+    ports:
+      - "8008:8080"
+
+  surgery-history:
+    build: ./UFs/SurgeryHistory
+    image: uf-surgeryhistory
+    ports:
+      - "8009:8080"
+
+  systolic-blood-pressure:
+    build: ./UFs/SystolicBloodPressure
+    image: uf-sbp
+    ports:
+      - "8010:8080"
+
+  temperature:
+    build: ./UFs/Temperature
+    image: uf-temperature
+    ports:
+      - "8011:8080"
+
+  PatientMedicalRecordAdaptor:
+    build: ./Adaptors/PatientMedicalRecordAdaptor
+    image: patient-medical-record-adaptor
+    ports:
+      - "8012:8080"
+
+
+  PatientMonitorAdaptorPhilips:
+    build: ./Adaptors/PatientMonitorAdaptor
+    image: patient-monitor-adaptor-philips
+    ports:
+      - "8013:8080"
+
+  PatientMonitorAdaptorExtVendor:
+    build: ./Adaptors/PatientMonitorAdaptorExtVendor
+    image: patient-monitor-adaptor-ext-vendor
+    ports:
+      - "8014:8080"
+
+  WorkflowRequestController:
+    build: ./UFs/WorkflowRequestController
+    image: workflow-request-controller
+    ports:
+      - "8015:8080"

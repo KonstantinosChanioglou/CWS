@@ -6,13 +6,40 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="camunda8" />
+        <module name="uf-temperature" />
+        <module name="BloodPressure" />
+        <module name="HeartRate" />
+        <module name="ChronicIlliness" />
+        <module name="MeanArterialPresure" />
+        <module name="DummyAction" />
+        <module name="SystolicBloodPressure" />
+        <module name="ChronicIllness" />
+        <module name="PatientMonitorAdaptor (1)" />
+        <module name="MeanArterialPressure" />
+        <module name="PatientMonitorAdaptorExtVendor" />
+        <module name="ImmuneCompromisation" />
+        <module name="WorkflowRequestController" />
+        <module name="SurgeryHistory" />
+        <module name="PatientMonitorAdaptor" />
+        <module name="Age" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="ChronicIlliness" target="17" />
+      <module name="common-utils" target="17" />
+      <module name="CWS-parent" target="14" />
+      <module name="PatientMedicalRecordAdaptor" target="17" />
+      <module name="PatientMonitor" target="14" />
+      <module name="RespirationRate" target="17" />
+      <module name="Temperature" target="14" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="camunda8" options="-parameters" />
+      <module name="CWS-parent" options="-parameters" />
+      <module name="PatientMonitor" options="-parameters" />
+      <module name="Temperature" options="-parameters" />
+      <module name="camunda8" options="" />
     </option>
   </component>
 </project>
