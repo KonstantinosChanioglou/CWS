@@ -23,11 +23,11 @@ public class PMAdaptor {
     private final DynamicQueueManager dynamicQueueManager;
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    public static final String TEMPERATURE_REQUEST_QUEUE = "temperature.request.ext.vendor.pm.queue";
-    public static final String HEART_RATE_REQUEST_QUEUE  = "heartrate.request.ext.vendor.pm.queue";
-    public static final String RESPIRATION_RATE_REQUEST_QUEUE  = "respiration.request.ext.vendor.pm.queue";
-    public static final String SYSTOLIC_BLOOD_PRESSURE_REQUEST_QUEUE  = "systolicBloodPressure.ext.vendor.pm.request.queue";
-    public static final String MEAN_ARTERIAL_PRESSURE_REQUEST_QUEUE  = "meanArterialPressure.request.ext.vendor.pm.queue";
+    public static final String TEMPERATURE_REQUEST_QUEUE = "temperature.request.type2.pm.queue";
+    public static final String HEART_RATE_REQUEST_QUEUE  = "heartrate.request.type2.pm.queue";
+    public static final String RESPIRATION_RATE_REQUEST_QUEUE  = "respiration.type2.vendor.pm.queue";
+    public static final String SYSTOLIC_BLOOD_PRESSURE_REQUEST_QUEUE  = "systolicBloodPressure.type2.pm.request.queue";
+    public static final String MEAN_ARTERIAL_PRESSURE_REQUEST_QUEUE  = "meanArterialPressure.request.type2.pm.queue";
 
     public static final String TEMPERATURE_REQUEST_ROUTING_KEY = "temperature.request";
     public static final String HEART_RATE_REQUEST_ROUTING_KEY = "heartrate.request";

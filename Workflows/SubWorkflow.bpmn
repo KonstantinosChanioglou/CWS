@@ -8,7 +8,7 @@
     <bpmn:startEvent id="StartEvent_1">
       <bpmn:outgoing>Flow_04r0h4i</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:serviceTask id="Activity_00mlcyb" name="Standard Treatment">
+    <bpmn:serviceTask id="Activity_00mlcyb" name="DummyTask">
       <bpmn:extensionElements>
         <zeebe:taskDefinition type="executeDummyAction" />
       </bpmn:extensionElements>
@@ -27,6 +27,7 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_00mlcyb_di" bpmnElement="Activity_00mlcyb">
         <dc:Bounds x="250" y="80" width="100" height="80" />
+        <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_04r0h4i_di" bpmnElement="Flow_04r0h4i">
         <di:waypoint x="188" y="120" />

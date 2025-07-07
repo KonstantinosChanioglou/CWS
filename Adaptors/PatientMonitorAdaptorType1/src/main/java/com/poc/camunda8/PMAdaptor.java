@@ -25,11 +25,11 @@ public class PMAdaptor {
     private final ObjectMapper objectMapper = new ObjectMapper();
 
 
-    public static final String TEMPERATURE_REQUEST_QUEUE = "temperature.request.philips.pm.queue";
-    public static final String HEART_RATE_REQUEST_QUEUE  = "heartrate.request.philips.pm.queue";
-    public static final String RESPIRATION_RATE_REQUEST_QUEUE  = "respiration.request.philips.pm.queue";
-    public static final String SYSTOLIC_BLOOD_PRESSURE_REQUEST_QUEUE  = "systolicBloodPressure.philips.pm.request.queue";
-    public static final String MEAN_ARTERIAL_PRESSURE_REQUEST_QUEUE  = "meanArterialPressure.request.philips.pm.queue";
+    public static final String TEMPERATURE_REQUEST_QUEUE = "temperature.request.type1.pm.queue";
+    public static final String HEART_RATE_REQUEST_QUEUE  = "heartrate.request.type1.pm.queue";
+    public static final String RESPIRATION_RATE_REQUEST_QUEUE  = "respiration.request.type1.pm.queue";
+    public static final String SYSTOLIC_BLOOD_PRESSURE_REQUEST_QUEUE  = "systolicBloodPressure.type1.pm.request.queue";
+    public static final String MEAN_ARTERIAL_PRESSURE_REQUEST_QUEUE  = "meanArterialPressure.request.type1.pm.queue";
 
     public static final String TEMPERATURE_REQUEST_ROUTING_KEY = "temperature.request";
     public static final String HEART_RATE_REQUEST_ROUTING_KEY = "heartrate.request";
