@@ -1,40 +1,96 @@
-CWS Proof of Concept Implementaiton
+# CWS Proof of Concept Implementation
 
 The goal of the provided implementation is to demonstrate the capabilities of the proposed evolvable CWS design.
 
-In Adaptors folder can be found the three adaptors used for the scenarios described in the report. The idea is that each adaptor can be linked with a specific external system. Adoptor Type 1 is linked with the external system PM type 1 and adaptor Type 2 is linked to external system PM Type 2.
-Both provide functionality to invoke exposed services of the external systems, and expose service to trigger sepsis workflow in CWS. They simulate the needed translation the requests from-to CWS is needed. Also a third adaptor handles communication with the an external system simulating the EMR.
-In full scale implementation other adaptors can be added in this folder as well.
+---
 
-In UFs folder all the UFs needed for executing the sepsis workflow are implemented. In full scale implementation other adaptors can be added in this folder as well.
+## Adaptors
 
-In External Systems folder the two PMs types as well as a DB simulating an EMR can be found. The two different PMs simulating different types of PMs by just exposing differnt tyes of endpoints but the point is that in the actual implementation these types will implement different interoperability protocols and not just different endpoints.
+The `Adaptors` folder contains the three adaptors used in the scenarios described in the report. Each adaptor is linked to a specific external system:
 
-To run the system:
-1) Download and run the containers provided by Camunda Platform 8 (docker-compose-core.yaml): from https://github.com/techbuzzblogs/camunda/tree/main/camunda-platform-8.0.
-   1) This include Zeebe Cluster, Camunda Operate and Tasklist as well as Elasticsearch
-   2) This is provided already in this project
-   3) In the CWS folder run: docker-compose -f docker-compose-core.yaml up -d
+- Adaptor Type 1 is connected to PM Type 1
+- Adaptor Type 2 is connected to PM Type 2
 
-2) Download and run te RabbitMQ container
-   1) docker run -d --hostname rabbit-host --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3-management
+Both provide functionality to:
+- Invoke services exposed by their respective external systems
+- Expose a service that triggers the sepsis workflow in the CWS
 
-3) To run all the UFs and Adators:
-   1) docker-compose -f docker-compose-cws.yaml up --build
+They simulate the necessary translation of requests between the CWS and the external systems.  
+A third adaptor handles communication with an external system that simulates an EMR.
 
-3) To run the external systems
-   1) docker-compose -f docker-compose-extsys.yaml up --build
+In a full-scale implementation, additional adaptors can be added to this folder as needed.
 
-After running all the containers, you can start using the CWS for executing sepsis workflow.
+---
 
-1) Deploy the Sepsis Workflow.bpmn to the execution eninge using the Camunda editor (Cluster Endpoint is the zeebe endpoint http://localhost:26559 or 26500)
+## Unit Functions (UFs)
 
-2) You can either trigger the workflow weither by using the editor or sending a request to PM Adaptors from inside the container of a PM-Type1 using the command:
-   1) curl -X POST http://PatientMonitorAdaptorType1:8181/trigger-sepsis -H "Content-Type: application/json" -d '{"patientId": 1}'
+The `UFs` folder contains all Unit Functions (UFs) required to execute the sepsis workflow.
 
-3) The instance of the workflow will appear in the camunda operate which you can open by clicking the port on its container in Docker.
+In a full-scale implementation, additional UFs may also be added here.
 
-4) The user tasks can be executed by opening in the same way the tasklist and selecting the wanted task.
+---
+
+## External Systems
+
+The `External Systems` folder contains:
+- Two types of simulated PMs
+- A database representing an EMR
+
+The PMs simulate different types of patient monitors by exposing different types of endpoints.  
+In an actual implementation, these different types of external systems would implement different interoperability protocols, not just different endpoints.
+
+---
+
+## How to Run the System
+
+1. Either use the already provided `docker-compose-core.yaml` or download and run the containers provided by Camunda Platform 8:  
+   [Camunda Platform 8 on GitHub](https://github.com/techbuzzblogs/camunda/tree/main/camunda-platform-8.0)
+
+   ```bash
+   docker-compose -f docker-compose-core.yaml up -d
+   ```
+
+2. Download and run the RabbitMQ container:
+
+   ```bash
+   docker run -d --hostname rabbit-host --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3-management
+   ```
+
+3. To run all the UFs and Adaptors:
+
+   ```bash
+   docker-compose -f docker-compose-cws.yaml up --build
+   ```
+
+4. To run the external systems:
+
+   ```bash
+   docker-compose -f docker-compose-extsys.yaml up --build
+   ```
+
+---
+
+## How to Use the System
+
+1. Deploy the `Sepsis Workflow.bpmn` and its subworkflows `Standard Treatment.bpmn` and `SubWorkflow.bpmn` to the execution engine using the Camunda modeler.  
+   Cluster Endpoint: `http://localhost:26559` or `http://localhost:26500`
+
+2. Trigger the workflow:
+   - Either via the Camunda modeler, or
+   - By sending a request to the PM Adaptor from inside the container of `PM-Type1`:
+
+     ```bash
+     curl -X POST http://PatientMonitorAdaptorType1:8181/trigger-sepsis -H "Content-Type: application/json" -d '{"patientId": 1}'
+     ```
+
+3. The instance of the workflow will appear in Camunda Operate, which can be accessed by clicking the port on its container in Docker.
+
+4. User tasks can be executed by opening the Tasklist in the same way and selecting the desired task.
+
+5. Reconfiguration of the workflow can be done using the Camunda modeler.  
+   After updating the workflow, redeploy it to the execution engine before use.
+
+6. Adaptors can be enabled or disabled via the Docker interface, simulating the dynamic adaptation of the system to the availability of external systems.
 
 
 [//]: # (Documentation:)
