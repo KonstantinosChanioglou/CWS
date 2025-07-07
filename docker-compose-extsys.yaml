@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  monitor1:
+    build:
+      context: ./ExternalSystems/PatientMonitorType1
+    container_name: PM-Type1
+    ports:
+      - "8090:8090"
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: hospital
+      DB_USER: user
+      DB_PASSWORD: password
+
+  monitor2:
+    build:
+      context: ./ExternalSystems/PatientMonitorType2
+    container_name: PM-Type2
+    ports:
+      - "8091:8090"
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: hospital
+      DB_USER: user
+      DB_PASSWORD: password
+
+  db:
+    image: postgres:15
+    container_name: Patient_DB_EMR
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: hospital
+    volumes:
+      - ./ExternalSystems/PatientMedicalRecordsDB/init.sql:/docker-entrypoint-initdb.d/init.sql

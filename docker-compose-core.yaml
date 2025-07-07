@@ -1,5 +1,5 @@
 # While the Docker images themselves are supported for production usage,
-# this docker-compose.yaml is designed to be used by developers to run
+# this docker-compose-core.yaml is designed to be used by developers to run
 # an environment locally. It is not designed to be used in production.
 # We recommend to use Kubernetes in production with our Helm Charts:
 # https://docs.camunda.io/docs/self-managed/platform-deployment/kubernetes-helm/

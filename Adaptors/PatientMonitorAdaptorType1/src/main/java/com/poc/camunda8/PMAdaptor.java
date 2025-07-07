@@ -61,7 +61,7 @@ public class PMAdaptor {
             String patientId = requestMap.get("patientId").toString();
 
             // Set the external system URL. Here the correct PM based on the patient ID should be reached
-            String externalSystemUrl = "http://host.docker.internal:8090/temperature";
+            String externalSystemUrl = "http://PM-Type1:8090/temperature_type1";
 
             // Make a GET request to the Flask server
             ResponseEntity<String> response = restTemplate.getForEntity(externalSystemUrl, String.class);
@@ -88,7 +88,7 @@ public class PMAdaptor {
             String patientId = requestMap.get("patientId").toString();
 
             // Set the external system URL. Here the correct PM based on the patient ID should be reached
-            String externalSystemUrl = "http://host.docker.internal:8090/heartrate";
+            String externalSystemUrl = "http://PM-Type1:8090/heartrate_type1";
 
             // Make a GET request to the Flask server
             ResponseEntity<String> response = restTemplate.getForEntity(externalSystemUrl, String.class);
@@ -114,7 +114,7 @@ public class PMAdaptor {
             String patientId = requestMap.get("patientId").toString();
 
             // Set the external system URL. Here the correct PM based on the patient ID should be reached
-            String externalSystemUrl = "http://host.docker.internal:8090/respirationrate";
+            String externalSystemUrl = "http://PM-Type1:8090/respirationrate_type1";
 
             // Make a GET request to the Flask server
             ResponseEntity<String> response = restTemplate.getForEntity(externalSystemUrl, String.class);
@@ -140,7 +140,7 @@ public class PMAdaptor {
             String patientId = requestMap.get("patientId").toString();
 
             // Set the external system URL. Here the correct PM based on the patient ID should be reached
-            String externalSystemUrl = "http://host.docker.internal:8090/systolicBloodPressure";
+            String externalSystemUrl = "http://PM-Type1:8090/systolicBloodPressure_type1";
 
             // Make a GET request to the Flask server
             ResponseEntity<String> response = restTemplate.getForEntity(externalSystemUrl, String.class);
@@ -166,7 +166,7 @@ public class PMAdaptor {
             String patientId = requestMap.get("patientId").toString();
 
             // Set the external system URL. Here the correct PM based on the patient ID should be reached
-            String externalSystemUrl = "http://host.docker.internal:8090/meanArterialPressure";
+            String externalSystemUrl = "http://PM-Type1:8090/meanArterialPressure_type1";
 
             // Make a GET request to the Flask server
             ResponseEntity<String> response = restTemplate.getForEntity(externalSystemUrl, String.class);

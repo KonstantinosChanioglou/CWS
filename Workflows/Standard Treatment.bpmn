@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0i69moc" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.33.1" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.6.0">
+  <bpmn:process id="StandardTreatment" name="Standard Treatment" isExecutable="true">
+    <bpmn:endEvent id="Event_1f0v5cj">
+      <bpmn:incoming>Flow_0brvss2</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_04r0h4i" sourceRef="StartEvent_1" targetRef="Activity_00mlcyb" />
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_04r0h4i</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:serviceTask id="Activity_00mlcyb" name="Standard Treatment">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="executeDummyAction" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_04r0h4i</bpmn:incoming>
+      <bpmn:outgoing>Flow_0brvss2</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_0brvss2" sourceRef="Activity_00mlcyb" targetRef="Event_1f0v5cj" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="StandardTreatment">
+      <bpmndi:BPMNShape id="Event_1f0v5cj_di" bpmnElement="Event_1f0v5cj">
+        <dc:Bounds x="402" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_1_di" bpmnElement="StartEvent_1">
+        <dc:Bounds x="152" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_00mlcyb_di" bpmnElement="Activity_00mlcyb">
+        <dc:Bounds x="250" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_04r0h4i_di" bpmnElement="Flow_04r0h4i">
+        <di:waypoint x="188" y="120" />
+        <di:waypoint x="250" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0brvss2_di" bpmnElement="Flow_0brvss2">
+        <di:waypoint x="350" y="120" />
+        <di:waypoint x="402" y="120" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
