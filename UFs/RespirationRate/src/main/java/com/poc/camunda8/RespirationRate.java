@@ -41,8 +41,8 @@ public class RespirationRate {
         dynamicQueueManager.createQueueAndBinding(RESPONSE_QUEUE, RESPONSE_ROUTING_KEY);
     }
 
-    @ZeebeWorker(type = "checkRespirationRate", autoComplete = false)
-    public void checkRespirationRate(ActivatedJob job) {
+    @ZeebeWorker(type = "measureRespirationRate", autoComplete = false)
+    public void measureRespirationRate(ActivatedJob job) {
         System.out.println("UF: Requesting Respiration rate from external system...");
 
         Map<String, Object> variables = job.getVariablesAsMap();

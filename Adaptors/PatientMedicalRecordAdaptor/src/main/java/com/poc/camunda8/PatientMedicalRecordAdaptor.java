@@ -88,7 +88,7 @@ public class PatientMedicalRecordAdaptor {
                 responseQueue = "chronicillness.response";
                 break;
             default:
-                System.err.println("❌ Unknown queue: " + queue);
+                System.err.println("Unknown queue: " + queue);
                 return;
         }
 
@@ -97,13 +97,13 @@ public class PatientMedicalRecordAdaptor {
             Integer patientId = Integer.valueOf(requestMap.get("patientId").toString());
             Long jobKey = Long.valueOf(requestMap.get("jobKey").toString());
 
-            System.out.println("📥 PatientMedicalRecordAdaptor: Fetching '" + column + "' for patientId = " + patientId);
+            System.out.println("PatientMedicalRecordAdaptor: Fetching '" + column + "' for patientId = " + patientId);
 
             String sql = "SELECT " + column + " FROM patients WHERE patientId = ?";
             List<Object> results = jdbcTemplate.queryForList(sql, new Object[]{patientId}, Object.class);
 
             if (results.isEmpty()) {
-                System.err.println("❌ No result found for patientId = " + patientId);
+                System.err.println("No result found for patientId = " + patientId);
                 return;
             }
 
@@ -112,10 +112,10 @@ public class PatientMedicalRecordAdaptor {
 
             // Send to RabbitMQ
             rabbitTemplate.convertAndSend("ExternalSystem.exchange", responseQueue, enrichedResponse);
-            System.out.println("✅ Responded to " + responseQueue + " with: " + enrichedResponse);
+            System.out.println("Responded to " + responseQueue + " with: " + enrichedResponse);
 
         } catch (Exception e) {
-            System.err.println("❌ Failed query or message parsing: " + e.getMessage());
+            System.err.println("Failed query or message parsing: " + e.getMessage());
         }
     }
 

@@ -42,8 +42,8 @@ public class SystolicBloodPressure {
         dynamicQueueManager.createQueueAndBinding(RESPONSE_QUEUE, RESPONSE_ROUTING_KEY);
     }
 
-    @ZeebeWorker(type = "checkSystolicBloodPressure", autoComplete = false)
-    public void checkSystolicBloodPressure(ActivatedJob job) throws JsonProcessingException {
+    @ZeebeWorker(type = "measureSystolicBloodPressure", autoComplete = false)
+    public void measureSystolicBloodPressure(ActivatedJob job) throws JsonProcessingException {
 
         System.out.println("UF: Requesting Systolic Blood Pressure from external system...");
 

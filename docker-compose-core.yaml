@@ -15,7 +15,7 @@ services:
     image: camunda/zeebe:${CAMUNDA_PLATFORM_VERSION:-8.0.0}
     container_name: zeebe
     ports:
-      - "26500:26500"
+      - "26559:26500"
       - "9600:9600"
     environment: # https://docs.camunda.io/docs/self-managed/zeebe-deployment/configuration/environment-variables/
       - ZEEBE_BROKER_EXPORTERS_ELASTICSEARCH_CLASSNAME=io.camunda.zeebe.exporter.ElasticsearchExporter

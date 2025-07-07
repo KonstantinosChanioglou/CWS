@@ -15,12 +15,12 @@
 	<!-- This is now the true parent of all UF and Adaptor modules -->
 	<modules>
 		<module>UFs/Temperature</module>
-		<module>Adaptors/PatientMonitorAdaptor</module>
+		<module>Adaptors/PatientMonitorAdaptorType1</module>
 		<module>Adaptors/PatientMedicalRecordAdaptor</module>
-		<module>Adaptors/PatientMonitorAdaptorExtVendor</module>
+		<module>Adaptors/PatientMonitorAdaptorType2</module>
         <module>UFs/Age</module>
         <module>UFs/BloodPressure</module>
-		<module>UFs/ChronicIlliness</module>
+		<module>UFs/ChronicIllness</module>
 		<module>UFs/HeartRate</module>
 		<module>UFs/ImmuneCompromisation</module>
 		<module>UFs/MeanArterialPressure</module>

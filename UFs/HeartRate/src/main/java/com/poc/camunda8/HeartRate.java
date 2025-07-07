@@ -41,8 +41,8 @@ public class HeartRate {
         dynamicQueueManager.createQueueAndBinding(RESPONSE_QUEUE, RESPONSE_ROUTING_KEY);
     }
 
-    @ZeebeWorker(type = "checkHeartRate", autoComplete = false)
-    public void checkHeartRate(ActivatedJob job) {
+    @ZeebeWorker(type = "measureHeartRate", autoComplete = false)
+    public void measureHeartRate(ActivatedJob job) {
 
         System.out.println("UF: Requesting Heart Rate from external system...");
 

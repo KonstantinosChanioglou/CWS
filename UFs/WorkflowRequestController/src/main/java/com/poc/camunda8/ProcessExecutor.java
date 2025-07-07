@@ -26,13 +26,13 @@ public class ProcessExecutor {
         this.zeebeClient = zeebeClient;
         this.dynamicQueueManager = dynamicQueueManager;
         dynamicQueueManager.createQueueAndBinding(SEPSIS_EXECUTE_REQUEST_QUEUE, SEPSIS_EXECUTE_ROURING_KEY);
-        System.out.println("✅ ProcessExecutor is initialized and active");
+        System.out.println("\uD83D\uDDF8 ProcessExecutor is initialized and active");
     }
 
     // This is triggered from external systems (from PMAdaptor)
     @RabbitListener(queues = "sepsis.execute.queue")
     public void executeProcess(Integer patientId) {
-        System.out.println("✅ Message received to start sepsis workflow for patient: " + patientId);
+        System.out.println("Message received to start sepsis workflow for patient: " + patientId);
 
         Map<String, Object> variables = new HashMap<>();
         variables.put("patientId", patientId);
@@ -45,10 +45,10 @@ public class ProcessExecutor {
                     .variables(variables)
                     .send()
                     .join();
-            System.out.println("✅ Process instance started with key: " + event.getProcessInstanceKey());
+            System.out.println("Process instance started with key: " + event.getProcessInstanceKey());
 
         } catch (Exception e) {
-            System.err.println("❌ Failed to start process: " + e.getMessage());
+            System.err.println("Failed to start process: " + e.getMessage());
         }
 
     }

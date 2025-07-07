@@ -42,12 +42,12 @@ public class Age {
 
     }
 
-    @ZeebeWorker(type = "checkAge", autoComplete = false)
-    public void checkAge(JobClient client, ActivatedJob job) {
+    @ZeebeWorker(type = "retrieveAge", autoComplete = false)
+    public void retrieveAge(JobClient client, ActivatedJob job) {
         System.out.println("UF: Requesting Age from external system...");
 
         Map<String, Object> variables = job.getVariablesAsMap();
-        Integer patientId = (Integer) variables.get("patientId"); // ✅ extract patientId
+        Integer patientId = (Integer) variables.get("patientId"); // extract patientId
 
         // Track this job as active
         activeJobs.put(job.getKey(), true);

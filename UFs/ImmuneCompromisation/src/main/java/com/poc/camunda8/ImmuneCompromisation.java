@@ -41,8 +41,8 @@ public class ImmuneCompromisation {
         dynamicQueueManager.createQueueAndBinding(RESPONSE_QUEUE, RESPONSE_ROUTING_KEY);
     }
 
-    @ZeebeWorker(type = "checkImmuneCompromization", autoComplete = false)
-    public void checkImmuneCompromization(ActivatedJob job) {
+    @ZeebeWorker(type = "evaluateImmuneCompromization", autoComplete = false)
+    public void evaluateImmuneCompromization(ActivatedJob job) {
         System.out.println("UF: Requesting Immune Compromization from external system...");
 
         Map<String, Object> variables = job.getVariablesAsMap();

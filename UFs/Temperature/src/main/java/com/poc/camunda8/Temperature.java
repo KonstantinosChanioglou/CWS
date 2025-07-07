@@ -39,8 +39,8 @@ public class Temperature {
         dynamicQueueManager.createQueueAndBinding(RESPONSE_QUEUE, RESPONSE_ROUTING_KEY);
     }
 
-    @ZeebeWorker(type = "checkTemperature", autoComplete = false)
-    public void checkTemperature(ActivatedJob job) throws JsonProcessingException {
+    @ZeebeWorker(type = "measureTemperature", autoComplete = false)
+    public void measureTemperature(ActivatedJob job) throws JsonProcessingException {
 
         System.out.println("UF: Requesting temperature from external system...");
 
@@ -65,13 +65,27 @@ public class Temperature {
         Integer temperature = (Integer) responseMap.get("value");
         Long jobKey = (Long) responseMap.get("jobKey");
 
-        System.out.println("UF: Extracted Temperature Value: " + temperature);
-        System.out.println("UF: Extracted JobKey to mark complete: " + jobKey);
+        // Simulate failure for demonstration
+        if (false) { // Replace `true` with any condition if you want dynamic failure
+            zeebeClient.newFailCommand(jobKey)
+                    .retries(0) // Set to 0 to trigger incident and show retry button
+                    .errorMessage("Simulated failure in Temperature UF")
+                    .send()
+                    .join();
+
+            System.err.println("UF: Simulated failure sent to Camunda.");
+            return;
+        }
 
         // Check if jobKey is still tracked
         if (!activeJobs.containsKey(jobKey)) {
-            System.err.println("No job key available to complete the process. Ignoring the response.");
+            System.err.println("Ignoring the response. Already a successful temperature measurement response has benn recieved");
+
+            //System.err.println("No job key available to complete the process. Ignoring the response.");
             return;
+        }else{
+            System.out.println("UF: Extracted Temperature Value: " + temperature);
+            System.out.println("UF: Extracted JobKey to mark complete: " + jobKey);
         }
 
         try {

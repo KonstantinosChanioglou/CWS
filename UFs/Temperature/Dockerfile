@@ -5,7 +5,7 @@ FROM eclipse-temurin:21-jre
 WORKDIR /app
 
 # Copy the JAR into the container
-COPY target/uf-temperature-1.0.0.jar app.jar
+COPY target/Temperature-1.0.0.jar app.jar
 
 # Set environment variables if needed (optional)
 # ENV SPRING_PROFILES_ACTIVE=dev

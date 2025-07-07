@@ -41,8 +41,8 @@ public class MeanArterialPressure {
         dynamicQueueManager.createQueueAndBinding(RESPONSE_QUEUE, RESPONSE_ROUTING_KEY);
     }
 
-    @ZeebeWorker(type = "checkMeanArterialPressure", autoComplete = false)
-    public void checkMeanArterialPressure(ActivatedJob job) throws JsonProcessingException {
+    @ZeebeWorker(type = "measureMeanArterialPressure", autoComplete = false)
+    public void measureMeanArterialPressure(ActivatedJob job) throws JsonProcessingException {
 
         System.out.println("UF: Requesting Mean Arterial Pressure from external system...");
 

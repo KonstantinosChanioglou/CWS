@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.poc.uf</groupId>
-    <artifactId>uf-temperature</artifactId>
+    <artifactId>Temperature</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
 
