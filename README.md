@@ -43,26 +43,26 @@ In an actual implementation, these different types of external systems would imp
 
 ## How to Run the System
 
-1. Either use the already provided `docker-compose-core.yaml` or download and run the containers provided by Camunda Platform 8:  
-   [Camunda Platform 8 on GitHub](https://github.com/techbuzzblogs/camunda/tree/main/camunda-platform-8.0)
+1. Execute `docker-compose-core.yaml` to download and run the (Zeebe Engine, Elastic Search, Operate, Tasklist) containers provided by Camunda Platform 8:  
 
    ```bash
    docker-compose -f docker-compose-core.yaml up -d
    ```
+2. Download and install Modeler from [Camunda](https://docs.camunda.io/docs/components/modeler/desktop-modeler/install-the-modeler/)
 
-2. Download and run the RabbitMQ container:
+3. Execute the command beloow to download and run the RabbitMQ container:
 
    ```bash
    docker run -d --hostname rabbit-host --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3-management
    ```
 
-3. To run all the UFs and Adaptors:
+4. To run all the UFs and Adaptors:
 
    ```bash
    docker-compose -f docker-compose-cws.yaml up --build
    ```
 
-4. To run the external systems:
+5. To run the external systems:
 
    ```bash
    docker-compose -f docker-compose-extsys.yaml up --build
